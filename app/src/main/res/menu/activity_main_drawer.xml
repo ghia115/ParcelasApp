@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_add_circle_black"
+            android:title="Agregar Parcela" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_mode_edit_black2"
+            android:title="Editar Parcela" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_assignment_black"
+            android:title="Ver Parcelas" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_delete_black"
+            android:title="Eliminar Parcela" />
+    </group>
+
+</menu>

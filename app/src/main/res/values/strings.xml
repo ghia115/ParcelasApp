@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ParcelasApp</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="search_hint">Busqueda</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="agregar">AGREGAR</string>
+    <string name="parcela">Parcela</string>
+    <string name="localidad">Localidad</string>
+    <string name="latitud">Latitud</string>
+    <string name="longitud">Longitud</string>
+
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+</resources>
