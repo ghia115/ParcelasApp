@@ -6,10 +6,30 @@
     android:id="@+id/leads_container"
     android:background="@drawable/riego">
 
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dds"
+            android:layout_weight=".50"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance"
+            android:layout_weight=".50"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/leads_list"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
