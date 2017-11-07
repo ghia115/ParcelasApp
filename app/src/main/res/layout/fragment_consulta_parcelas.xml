@@ -12,22 +12,25 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/DDS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dds"
+            android:text="DDS"
             android:layout_weight=".50"
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/BALANCE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Balance"
+            android:text="BALANCE"
             android:layout_weight=".50"
             android:gravity="center"/>
 
     </LinearLayout>
 
     <ListView
+        android:layout_marginTop="25dp"
         android:id="@+id/leads_list"
         android:gravity="center"
         android:layout_width="match_parent"
