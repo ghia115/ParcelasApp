@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -13,6 +15,8 @@ import android.view.ViewGroup;
  */
 public class ConsultaParcelasFragment extends Fragment {
 
+    ListView mLeadsList;
+    ArrayAdapter<String> mLeadsAdapter;
 
     public ConsultaParcelasFragment() {
         // Required empty public constructor
@@ -25,7 +29,27 @@ public class ConsultaParcelasFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_consulta_parcelas, container, false);
 
+        mLeadsList = (ListView) v.findViewById(R.id.leads_list);
 
+        String[] leadsNames = {
+                "Alexander Pierrot",
+                "Carlos Lopez",
+                "Sara Bonz",
+                "Liliana Clarence",
+                "Benito Peralta",
+                "Juan Jaramillo",
+                "Christian Steps",
+                "Alexa Giraldo",
+                "Linda Murillo",
+                "Lizeth Astrada"
+        };
+
+        mLeadsAdapter = new ArrayAdapter<>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                leadsNames);
+
+        mLeadsList.setAdapter(mLeadsAdapter);
 
         return v;
     }
