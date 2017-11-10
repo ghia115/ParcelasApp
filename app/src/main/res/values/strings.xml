@@ -15,6 +15,6 @@
     <string name="latitud">Latitud</string>
     <string name="longitud">Longitud</string>
 
-    <item name="visible" type="id"/>
-    <item name="masked" type="id"/>
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
 </resources>

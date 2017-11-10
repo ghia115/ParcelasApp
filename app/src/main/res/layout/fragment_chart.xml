@@ -1,0 +1,19 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_weight="1"
+    android:background="@drawable/riego"
+    tools:context="com.example.luis.parcelasapp.fragments.chartFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/graphic" />
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.luis.parcelasapp.fragments.chartFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
 
@@ -194,6 +196,13 @@ public class MainActivity extends AppCompatActivity
                     R.id.relativelayuot_for_fragment,
                     borrar,
                     borrar.getTag()
+            ).commit();
+        } else if (id == R.id.graph) {
+            chartFragment chart = new chartFragment();
+            manager.beginTransaction().replace(
+                    R.id.relativelayuot_for_fragment,
+                    chart,
+                    chart.getTag()
             ).commit();
         }
 
