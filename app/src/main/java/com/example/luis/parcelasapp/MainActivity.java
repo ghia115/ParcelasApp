@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity
 
         MenuView.ItemView search = (MenuView.ItemView) findViewById(R.id.search);
 
-
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
