@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,7 +20,10 @@ import com.example.luis.parcelasapp.R;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,12 +67,10 @@ public class chartFragment extends Fragment {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 result.add(dataBalance(response.getJSONObject(i)));
-
                             }
                             catch (JSONException e) {
                             }
                         }
-                        System.out.println(result);
                         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
                         for (int i=0; i<result.size(); i++) {
                             DataPoint point = new DataPoint(result.get(i).getDds(), result.get(i).getBalance());
@@ -81,6 +83,13 @@ public class chartFragment extends Fragment {
                         series.setAnimated(true);
                         series.setDrawDataPoints(true);
                         series.setDataPointsRadius(5);
+
+                        series.setOnDataPointTapListener(new OnDataPointTapListener() {
+                            @Override
+                            public void onTap(Series series, DataPointInterface dataPoint) {
+                                Toast.makeText(getActivity(), "Dds y Balance: "+dataPoint, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 },
                 new Response.ErrorListener() {

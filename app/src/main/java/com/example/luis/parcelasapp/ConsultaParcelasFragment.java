@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.luis.parcelasapp.adapter.AdapterTabla;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
+import com.example.luis.parcelasapp.petitions.dataDdsBalance;
+
 import java.util.ArrayList;
 
 
@@ -21,8 +23,6 @@ import java.util.ArrayList;
  */
 public class ConsultaParcelasFragment extends Fragment {
 
-    //ListView mLeadsList;
-    //ArrayAdapter<String> mLeadsAdapter;
     ListView listView;
     ArrayList<DdsBalance> arrayDatos;
     AdapterTabla adapter;
@@ -40,50 +40,18 @@ public class ConsultaParcelasFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_consulta_parcelas, container, false);
 
         listView = (ListView) v.findViewById(R.id.leads_list);
-        arrayDatos = new ArrayList<DdsBalance>();
 
-        arrayDatos = new ArrayList<DdsBalance>();
-        DdsBalance articulo = new DdsBalance(12.3, 1);
-        arrayDatos.add(articulo);
-        articulo = new DdsBalance(13, 2);
-        arrayDatos.add(articulo);
-        articulo = new DdsBalance(14.4, 3);
-        arrayDatos.add(articulo);
-        articulo = new DdsBalance(15.12, 4);
-        arrayDatos.add(articulo);
-        articulo = new DdsBalance(9.45, 5);
-        arrayDatos.add(articulo);
+        dataDdsBalance db = new dataDdsBalance(getContext());
+        arrayDatos = db.data();
 
         adapter = new AdapterTabla(getActivity().getBaseContext(),arrayDatos);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity().getBaseContext(),arrayDatos.get(position).getDds(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(),arrayDatos.get(position).getDds(),Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*mLeadsList = (ListView) v.findViewById(R.id.leads_list);
-
-        String[] leadsNames = {
-                "Alexander Pierrot",
-                "Carlos Lopez",
-                "Sara Bonz",
-                "Liliana Clarence",
-                "Benito Peralta",
-                "Juan Jaramillo",
-                "Christian Steps",
-                "Alexa Giraldo",
-                "Linda Murillo",
-                "Lizeth Astrada"
-        };
-
-        mLeadsAdapter = new ArrayAdapter<>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                leadsNames);
-
-        mLeadsList.setAdapter(mLeadsAdapter);*/
 
         return v;
     }
