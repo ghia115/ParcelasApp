@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class dataDdsBalance extends AppCompatActivity {
     public Context context;
-    public String miError;
     private RequestQueue queue ;
 
     public dataDdsBalance (Context context){
