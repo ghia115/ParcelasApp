@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Context;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
@@ -48,7 +49,7 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
         final EditText edt1 = (EditText) rootView.findViewById(R.id.campoParcela);
         final EditText edt2 = (EditText) rootView.findViewById(R.id.campoLocalidad);
 
-        Button buttn = (Button) rootView.findViewById(R.id.altaParcela);
+        ImageButton buttn = (ImageButton) rootView.findViewById(R.id.altaParcela);
 
         editarLatitud = (TextView) rootView.findViewById(R.id.editarLatitud);
         editarLongitud = (TextView) rootView.findViewById(R.id.editarLongitud);

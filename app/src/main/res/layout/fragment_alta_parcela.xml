@@ -39,7 +39,9 @@
                     android:id="@+id/campoParcela"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Parcela" />
+                    android:hint="Parcela"
+                    android:gravity="center"
+                    android:background="@drawable/combo"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -51,7 +53,9 @@
                     android:id="@+id/campoLocalidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Localidad" />
+                    android:hint="Localidad"
+                    android:gravity="center"
+                    android:background="@drawable/combo"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +78,9 @@
                             android:id="@+id/editarLatitud"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/latitud"/>
+                            android:hint="@string/latitud"
+                            android:gravity="center"
+                            android:background="@drawable/combo"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -86,7 +92,9 @@
                             android:id="@+id/editarLongitud"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/longitud"/>
+                            android:hint="@string/longitud"
+                            android:gravity="center"
+                            android:background="@drawable/combo"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -134,14 +142,16 @@
                 android:layout_alignLeft="@+id/campoParcela"
                 android:layout_alignStart="@+id/campoParcela" />-->
 
-            <Button
+            <ImageButton
                 android:id="@+id/altaParcela"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/agregar"
                 android:onClick=""
-                android:theme="@style/RaisedButtonDark"
-                android:drawableRight="@drawable/ic_add_circle_black" />
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/btm_guardar" />
 
         </LinearLayout>
     </ScrollView>
