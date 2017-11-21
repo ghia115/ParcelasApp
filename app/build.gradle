@@ -32,8 +32,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:11.0.4'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.jjoe64:graphview:4.2.1'
+    compile 'com.roughike:bottom-bar:2.3.1'
     testCompile 'junit:junit:4.12'
-    compile files('libs/DatosBalanceDds.jar')
-    compile files('libs/json-simple-1.1.1.jar')
     compile 'com.android.volley:volley:1.0.0'
 }

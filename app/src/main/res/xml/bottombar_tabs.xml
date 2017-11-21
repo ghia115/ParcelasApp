@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_consultar"
+        title="@string/tabConsultar"
+        barColorWhenSelected="@android:color/white"
+        icon="@mipmap/ic_consultar"/>
+    <tab
+        id="@+id/tab_parcelas"
+        title="@string/tabParcelas"
+        barColorWhenSelected="@android:color/white"
+        icon="@mipmap/ic_parcelas"/>
+    <tab
+        id="@+id/tab_calendarizacion"
+        title="@string/tabCalendarizacion"
+        barColorWhenSelected="@android:color/white"
+        icon="@mipmap/ic_calendario"/>
+    <tab
+        id="@+id/tab_riego"
+        title="@string/tabRiego"
+        barColorWhenSelected="@android:color/white"
+        icon="@mipmap/ic_riego"/>
+</tabs>

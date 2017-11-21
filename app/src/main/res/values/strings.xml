@@ -14,6 +14,10 @@
     <string name="localidad">Localidad</string>
     <string name="latitud">Latitud</string>
     <string name="longitud">Longitud</string>
+    <string name="tabConsultar">Consultar</string>
+    <string name="tabParcelas">Parcelas</string>
+    <string name="tabCalendarizacion">Calendarización</string>
+    <string name="tabRiego">Riego</string>
 
     <item name="visible" type="id" />
     <item name="masked" type="id" />
