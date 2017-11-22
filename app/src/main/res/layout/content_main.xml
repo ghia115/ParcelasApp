@@ -9,12 +9,4 @@
     tools:context="com.example.luis.parcelasapp.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lstStudent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
 </RelativeLayout>

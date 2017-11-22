@@ -24,13 +24,9 @@ import android.widget.Toast;
 import com.example.luis.parcelasapp.fragments.chartFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    private CustomAdapter customAdapter;
-    ListView listView;
-    Cursor cursor;
-    ParcelasRepo studentRepo ;
-    private final static String TAG= MainActivity.class.getName().toString();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +58,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        studentRepo = new ParcelasRepo(this);
-        cursor=studentRepo.getStudentList();
-        customAdapter = new CustomAdapter(MainActivity.this,  cursor, 0);
-        listView = (ListView) findViewById(R.id.lstStudent);
-        listView.setAdapter(customAdapter);
 
-        //if(cursor==null) insertDummy();*
     }
 
     @Override
@@ -79,68 +69,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-        getMenuInflater().inflate(R.menu.options_menu, menu);
-
-        /*MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(this);*/
-
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            SearchView search = (SearchView) menu.findItem(R.id.search).getActionView();
-            search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-
-            search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    Log.d(TAG, "onQueryTextSubmit ");
-                    cursor=studentRepo.getStudentListByKeyword(s);
-                    if (cursor==null){
-                        Toast.makeText(MainActivity.this,"No records found!",Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(MainActivity.this, cursor.getCount() + " records found!",Toast.LENGTH_LONG).show();
-                    }
-                    customAdapter.swapCursor(cursor);
-
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    Log.d(TAG, "onQueryTextChange ");
-                    cursor=studentRepo.getStudentListByKeyword(s);
-                    if (cursor!=null){
-                        customAdapter.swapCursor(cursor);
-                    }
-                    return false;
-                }
-
-            });
-
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        // User pressed the search button
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        // User changed the text
-        return false;
     }
 
     @Override
