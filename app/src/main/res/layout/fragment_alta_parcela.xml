@@ -31,7 +31,7 @@
             android:padding="@dimen/horizontal_padding"
             tools:context="com.example.luis.parcelasapp.AltaParcelaFragment">
 
-            <android.support.design.widget.TextInputLayout
+            <!--<android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -57,12 +57,27 @@
                     android:gravity="center"
                     android:background="@drawable/combo"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>-->
+
+            <EditText
+                android:id="@+id/campoParcela"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Parcela"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
+
+            <EditText
+                android:id="@+id/campoLocalidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Localidad"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/borde">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -70,7 +85,7 @@
                     android:orientation="vertical"
                     android:layout_weight=".70">
 
-                    <android.support.design.widget.TextInputLayout
+                    <!--<android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -96,9 +111,27 @@
                             android:gravity="center"
                             android:background="@drawable/combo"/>
 
-                    </android.support.design.widget.TextInputLayout>
+                    </android.support.design.widget.TextInputLayout>-->
+
+                    <EditText
+                        android:id="@+id/editarLatitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/latitud"
+                        android:gravity="center"
+                        android:background="@drawable/combo"/>
+
+                    <EditText
+                        android:id="@+id/editarLongitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/longitud"
+                        android:gravity="center"
+                        android:background="@drawable/combo"/>
 
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -111,47 +144,66 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:backgroundTint="@android:color/darker_gray"
-                        android:layout_marginTop="@dimen/margin_top_floatingButton"
-                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_gps_fixed_24dp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <!--<EditText
-                android:id="@+id/campoParcela"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/cultivo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Parcela"
-                android:inputType="textPersonName"
-                android:layout_marginTop="123dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:hint="Cultivo"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
 
             <EditText
-                android:id="@+id/campoLocalidad"
-                android:layout_width="wrap_content"
+                android:id="@+id/arena"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Localidad"
-                android:layout_marginTop="21dp"
-                android:layout_below="@+id/campoParcela"
-                android:layout_alignLeft="@+id/campoParcela"
-                android:layout_alignStart="@+id/campoParcela" />-->
+                android:hint="Arena"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
+
+            <EditText
+                android:id="@+id/arcilla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Arcilla"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
+
+            <EditText
+                android:id="@+id/materiaSeca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Materia Seca"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
 
             <ImageButton
                 android:id="@+id/altaParcela"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/agregar"
+                android:layout_width="@dimen/buttonWidth"
+                android:layout_height="@dimen/buttonHeight"
                 android:onClick=""
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/btm_guardar" />
+
+            <ImageButton
+                android:id="@+id/cancelar"
+                android:layout_width="@dimen/buttonWidth"
+                android:layout_height="@dimen/buttonHeight"
+                android:onClick=""
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/btm_cancelar" />
 
         </LinearLayout>
     </ScrollView>
