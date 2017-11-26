@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,12 +16,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.content.Context;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -28,10 +34,11 @@ import android.view.View.OnClickListener;
  */
 public class AltaParcelaFragment extends Fragment implements OnClickListener {
 
-    TextView editarLatitud, editarLongitud;
+    TextView editarLatitud, editarLongitud, arena, arcilla, materiaSeca;
     FloatingActionButton location;
     LocationManager mlocManager;
     AlertDialog alert = null;
+    Spinner cultivos;
 
     public AltaParcelaFragment() {
         // Required empty public constructor
@@ -44,14 +51,60 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
         //return inflater.inflate(R.layout.fragment_alta_parcela, container, false);
         View rootView = inflater.inflate(R.layout.fragment_alta_parcela, container, false);
 
-        //Hacer un cast de un objeto de la vista en el controlador.
+        ArrayList<String> comboCultivo = new ArrayList<>();
+        comboCultivo.add("Cultivos");
+        comboCultivo.add("Maíz");
+        comboCultivo.add("Frijol");
+        comboCultivo.add("Manzano");
+
+
         final EditText edt1 = (EditText) rootView.findViewById(R.id.campoParcela);
         final EditText edt2 = (EditText) rootView.findViewById(R.id.campoLocalidad);
 
         ImageButton buttn = (ImageButton) rootView.findViewById(R.id.altaParcela);
 
+        cultivos  = (Spinner) rootView.findViewById(R.id.cultivos);
+        ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                comboCultivo){
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cultivos.setAdapter(arrayAdapter);
+
         editarLatitud = (TextView) rootView.findViewById(R.id.editarLatitud);
         editarLongitud = (TextView) rootView.findViewById(R.id.editarLongitud);
+        //cultivo = (TextView) rootView.findViewById(R.id.cultivo);
+        arena = (TextView) rootView.findViewById(R.id.arena);
+        arcilla = (TextView) rootView.findViewById(R.id.arcilla);
+        materiaSeca = (TextView) rootView.findViewById(R.id.materiaSeca);
         location = (FloatingActionButton) rootView.findViewById(R.id.location);
         location.setOnClickListener(this);
 
@@ -60,6 +113,7 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
         buttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Gets the data repository in write mode
                 SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -70,6 +124,10 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
                 values.put(Estructura_BBDD.NOMBRE_COLUMNA2, edt2.getText().toString());
                 values.put(Estructura_BBDD.LATITUD, editarLatitud.getText().toString());
                 values.put(Estructura_BBDD.LONGITUD, editarLongitud.getText().toString());
+                values.put(Estructura_BBDD.CULTIVO, cultivos.getSelectedItem().toString());
+                values.put(Estructura_BBDD.ARENA, arena.getText().toString());
+                values.put(Estructura_BBDD.ARCILLA, arcilla.getText().toString());
+                values.put(Estructura_BBDD.MATERIA, materiaSeca.getText().toString());
 
                 // Insert the new row, returning the primary key value of the new row
                 long newRowId = db.insert(Estructura_BBDD.TABLE_NAME, null, values);
@@ -81,6 +139,10 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
                 edt2.setText("");
                 editarLatitud.setText("");
                 editarLongitud.setText("");
+                cultivos.setSelection(0);
+                arena.setText("");
+                arcilla.setText("");
+                materiaSeca.setText("");
             }
         });
         /*buttn.setOnClickListener(new View.OnClickListener() {

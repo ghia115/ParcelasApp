@@ -19,6 +19,12 @@
     <string name="tabCalendarizacion">Calendarización</string>
     <string name="tabRiego">Riego</string>
 
+    <string-array name="arrayCultivo">
+        <item>Maíz</item>
+        <item>Frijol</item>
+        <item>Manzano</item>
+    </string-array>
+
     <item name="visible" type="id" />
     <item name="masked" type="id" />
 </resources>

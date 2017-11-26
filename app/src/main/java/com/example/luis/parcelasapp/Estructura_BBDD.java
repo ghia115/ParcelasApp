@@ -17,6 +17,10 @@ public class Estructura_BBDD {
     public static final String NOMBRE_COLUMNA2 = "localidad";
     public static final String LATITUD = "latitud";
     public static final String LONGITUD = "longitud";
+    public static final String CULTIVO = "cultivo";
+    public static final String ARENA = "arena";
+    public static final String ARCILLA = "arcilla";
+    public static final String MATERIA = "materia_seca";
     //}
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
@@ -26,14 +30,13 @@ public class Estructura_BBDD {
                     Estructura_BBDD.NOMBRE_COLUMNA1 + TEXT_TYPE + COMMA_SEP +
                     Estructura_BBDD.NOMBRE_COLUMNA2 + TEXT_TYPE + COMMA_SEP +
                     Estructura_BBDD.LATITUD + TEXT_TYPE + COMMA_SEP +
-                    Estructura_BBDD.LONGITUD + TEXT_TYPE + " )";
+                    Estructura_BBDD.LONGITUD + TEXT_TYPE +COMMA_SEP +
+                    Estructura_BBDD.CULTIVO + TEXT_TYPE + COMMA_SEP +
+                    Estructura_BBDD.ARENA + TEXT_TYPE + COMMA_SEP +
+                    Estructura_BBDD.ARCILLA + TEXT_TYPE + COMMA_SEP +
+                    Estructura_BBDD.MATERIA + TEXT_TYPE + " )";
 
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Estructura_BBDD.TABLE_NAME;
 
-    public int id;
-    public String parcela;
-    public String localidad;
-    public String latitud;
-    public String longitud;
 }

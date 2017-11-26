@@ -151,8 +151,16 @@
 
             </LinearLayout>
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/cultivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cultivo"
+                android:gravity="center"
+                android:background="@drawable/combo"/>-->
+
+            <Spinner
+                android:id="@+id/cultivos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cultivo"
@@ -190,7 +198,8 @@
                 android:onClick=""
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter"
                 android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/btm_guardar" />
 
@@ -201,7 +210,8 @@
                 android:onClick=""
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter"
                 android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/btm_cancelar" />
 
