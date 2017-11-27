@@ -9,4 +9,6 @@
     tools:context="com.example.luis.parcelasapp.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <include layout="@layout/bottombar"></include>
+
 </RelativeLayout>

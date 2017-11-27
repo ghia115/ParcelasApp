@@ -4,7 +4,7 @@
         id="@+id/tab_consultar"
         title="@string/tabConsultar"
         barColorWhenSelected="@android:color/white"
-        icon="@mipmap/ic_consultar"/>
+        icon="@drawable/my_tab_icon"/>
     <tab
         id="@+id/tab_parcelas"
         title="@string/tabParcelas"

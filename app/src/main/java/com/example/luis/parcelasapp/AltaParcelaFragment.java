@@ -26,15 +26,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AltaParcelaFragment extends Fragment implements OnClickListener {
+public class AltaParcelaFragment extends Fragment implements OnClickListener ,Validator.ValidationListener {
 
-    TextView editarLatitud, editarLongitud, arena, arcilla, materiaSeca;
+    @NotEmpty
+    private TextView edt1, edt2, editarLatitud, editarLongitud, arena, arcilla, materiaSeca;
+
     FloatingActionButton location;
     LocationManager mlocManager;
     AlertDialog alert = null;
@@ -51,6 +58,9 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
         //return inflater.inflate(R.layout.fragment_alta_parcela, container, false);
         View rootView = inflater.inflate(R.layout.fragment_alta_parcela, container, false);
 
+        final Validator validator = new Validator(this);
+        validator.setValidationListener(this);
+
         ArrayList<String> comboCultivo = new ArrayList<>();
         comboCultivo.add("Cultivos");
         comboCultivo.add("Maíz");
@@ -58,8 +68,8 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
         comboCultivo.add("Manzano");
 
 
-        final EditText edt1 = (EditText) rootView.findViewById(R.id.campoParcela);
-        final EditText edt2 = (EditText) rootView.findViewById(R.id.campoLocalidad);
+        edt1 = (TextView) rootView.findViewById(R.id.campoParcela);
+        edt2 = (TextView) rootView.findViewById(R.id.campoLocalidad);
 
         ImageButton buttn = (ImageButton) rootView.findViewById(R.id.altaParcela);
 
@@ -108,41 +118,13 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
         location = (FloatingActionButton) rootView.findViewById(R.id.location);
         location.setOnClickListener(this);
 
-        final BBDD_Helper helper = new BBDD_Helper(this.getContext());
-
         buttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                validator.validate();
                 // Gets the data repository in write mode
-                SQLiteDatabase db = helper.getWritableDatabase();
 
-                // Create a new map of values, where column names are the keys
-                ContentValues values = new ContentValues();
-                //values.put(Estructura_BBDD.ID, textoId.getText().toString());
-                values.put(Estructura_BBDD.NOMBRE_COLUMNA1, edt1.getText().toString());
-                values.put(Estructura_BBDD.NOMBRE_COLUMNA2, edt2.getText().toString());
-                values.put(Estructura_BBDD.LATITUD, editarLatitud.getText().toString());
-                values.put(Estructura_BBDD.LONGITUD, editarLongitud.getText().toString());
-                values.put(Estructura_BBDD.CULTIVO, cultivos.getSelectedItem().toString());
-                values.put(Estructura_BBDD.ARENA, arena.getText().toString());
-                values.put(Estructura_BBDD.ARCILLA, arcilla.getText().toString());
-                values.put(Estructura_BBDD.MATERIA, materiaSeca.getText().toString());
-
-                // Insert the new row, returning the primary key value of the new row
-                long newRowId = db.insert(Estructura_BBDD.TABLE_NAME, null, values);
-
-                Toast.makeText(getActivity().getBaseContext(), "Se guardo el registro con clave: " +
-                        newRowId, Toast.LENGTH_LONG).show();
-
-                edt1.setText("");
-                edt2.setText("");
-                editarLatitud.setText("");
-                editarLongitud.setText("");
-                cultivos.setSelection(0);
-                arena.setText("");
-                arcilla.setText("");
-                materiaSeca.setText("");
             }
         });
         /*buttn.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +169,56 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener {
             editarLatitud.setText(latitudeInfo);
             editarLongitud.setText(longitudeInfo);
 
+        }
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+
+        final BBDD_Helper helper = new BBDD_Helper(this.getContext());
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        //values.put(Estructura_BBDD.ID, textoId.getText().toString());
+        values.put(Estructura_BBDD.NOMBRE_COLUMNA1, edt1.getText().toString());
+        values.put(Estructura_BBDD.NOMBRE_COLUMNA2, edt2.getText().toString());
+        values.put(Estructura_BBDD.LATITUD, editarLatitud.getText().toString());
+        values.put(Estructura_BBDD.LONGITUD, editarLongitud.getText().toString());
+        values.put(Estructura_BBDD.CULTIVO, cultivos.getSelectedItem().toString());
+        values.put(Estructura_BBDD.ARENA, arena.getText().toString());
+        values.put(Estructura_BBDD.ARCILLA, arcilla.getText().toString());
+        values.put(Estructura_BBDD.MATERIA, materiaSeca.getText().toString());
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(Estructura_BBDD.TABLE_NAME, null, values);
+
+        Toast.makeText(getActivity().getBaseContext(), "Se guardo el registro con clave: " +
+                newRowId, Toast.LENGTH_LONG).show();
+
+        edt1.setText("");
+        edt2.setText("");
+        editarLatitud.setText("");
+        editarLongitud.setText("");
+        cultivos.setSelection(0);
+        arena.setText("");
+        arcilla.setText("");
+        materiaSeca.setText("");
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = "Todos los campos son obligatorios";
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
