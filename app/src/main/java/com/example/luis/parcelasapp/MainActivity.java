@@ -34,26 +34,23 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Toolbar actionBar = (Toolbar) findViewById(R.id.actionBar);
+        setSupportActionBar(actionBar);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayuot_for_fragment, new ConsultaParcelasFragment()).commit();
-
-        MenuView.ItemView search = (MenuView.ItemView) findViewById(R.id.search);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "nada", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        DrawerLayout drawerActionBar = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggleActionBar = new ActionBarDrawerToggle(
+                this, drawerActionBar, actionBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerActionBar.addDrawerListener(toggleActionBar);
+        toggleActionBar.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

@@ -3,21 +3,21 @@
     <tab
         id="@+id/tab_consultar"
         title="@string/tabConsultar"
-        barColorWhenSelected="@android:color/white"
+        barColorWhenSelected="@color/listItem1"
         icon="@drawable/consulta_tab_icon"/>
     <tab
         id="@+id/tab_parcelas"
         title="@string/tabParcelas"
-        barColorWhenSelected="@android:color/white"
+        barColorWhenSelected="@color/listItem1"
         icon="@drawable/parcela_tab_icon"/>
     <tab
         id="@+id/tab_calendarizacion"
         title="@string/tabCalendarizacion"
-        barColorWhenSelected="@android:color/white"
+        barColorWhenSelected="@color/listItem1"
         icon="@drawable/calendario_tab_icon"/>
     <tab
         id="@+id/tab_riego"
         title="@string/tabRiego"
-        barColorWhenSelected="@android:color/white"
+        barColorWhenSelected="@color/listItem1"
         icon="@drawable/riego_tab_icon"/>
 </tabs>

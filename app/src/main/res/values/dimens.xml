@@ -11,4 +11,5 @@
     <dimen name="bottombar_height">70dp</dimen>
     <dimen name="buttonWidth">250dp</dimen>
     <dimen name="buttonHeight">90dp</dimen>
+    <dimen name="elevation_actionbar">4dp</dimen>
 </resources>
