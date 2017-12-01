@@ -6,7 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -22,6 +24,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.luis.parcelasapp.fragments.chartFragment;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,8 +42,43 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbarActionBar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbarActionBar);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativelayuot_for_fragment, new ConsultaParcelasFragment()).commit();
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottombar);
+        bottomBar.setDefaultTab(R.id.tab_consultar);
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                switch (tabId){
+                    case R.id.tab_consultar:
+                        BorrarParcelaFragment borrarParcelaFragment = new BorrarParcelaFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayuot_for_fragment, borrarParcelaFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+                        break;
+                    case R.id.tab_parcelas:
+                        AltaParcelaFragment altaParcelaFragment = new AltaParcelaFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayuot_for_fragment, altaParcelaFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+                        break;
+                    case R.id.tab_calendarizacion:
+                        ConsultaParcelasFragment consultaParcelasFragment = new ConsultaParcelasFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayuot_for_fragment, consultaParcelasFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+                        break;
+                    case R.id.tab_riego:
+                        chartFragment chart = new chartFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayuot_for_fragment, chart)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .addToBackStack(null).commit();
+                        break;
+                }
+            }
+        });
+
+        /*FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.relativelayuot_for_fragment, new ConsultaParcelasFragment()).commit();*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -4,20 +4,20 @@
         id="@+id/tab_consultar"
         title="@string/tabConsultar"
         barColorWhenSelected="@color/listItem1"
-        icon="@drawable/consulta_tab_icon"/>
+        icon="@drawable/ic_search"/>
     <tab
         id="@+id/tab_parcelas"
         title="@string/tabParcelas"
         barColorWhenSelected="@color/listItem1"
-        icon="@drawable/parcela_tab_icon"/>
+        icon="@drawable/ic_layers"/>
     <tab
         id="@+id/tab_calendarizacion"
         title="@string/tabCalendarizacion"
         barColorWhenSelected="@color/listItem1"
-        icon="@drawable/calendario_tab_icon"/>
+        icon="@drawable/ic_date_range"/>
     <tab
         id="@+id/tab_riego"
         title="@string/tabRiego"
         barColorWhenSelected="@color/listItem1"
-        icon="@drawable/riego_tab_icon"/>
+        icon="@drawable/ic_show_chart"/>
 </tabs>
