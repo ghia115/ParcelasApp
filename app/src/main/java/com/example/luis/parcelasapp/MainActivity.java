@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Toolbar actionBar = (Toolbar) findViewById(R.id.actionBar);
-        setSupportActionBar(actionBar);
+
+        Toolbar toolbarActionBar = (Toolbar) findViewById(R.id.actionBar);
+        setSupportActionBar(toolbarActionBar);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativelayuot_for_fragment, new ConsultaParcelasFragment()).commit();
@@ -45,16 +46,6 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        DrawerLayout drawerActionBar = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggleActionBar = new ActionBarDrawerToggle(
-                this, drawerActionBar, actionBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerActionBar.addDrawerListener(toggleActionBar);
-        toggleActionBar.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
 
     }
 
@@ -69,6 +60,40 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_add) {
+
+            // Do something
+            return true;
+        }
+        if (id == R.id.action_edit) {
+
+            // Do something
+            return true;
+        }
+        if (id == R.id.action_del) {
+
+            // Do something
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -82,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
