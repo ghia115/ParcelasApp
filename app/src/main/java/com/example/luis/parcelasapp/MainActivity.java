@@ -1,17 +1,9 @@
 package com.example.luis.parcelasapp;
 
-import android.annotation.TargetApi;
-import android.app.SearchManager;
-import android.content.Context;
-import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.view.menu.MenuView;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.luis.parcelasapp.fragments.chartFragment;
@@ -50,8 +41,8 @@ public class MainActivity extends AppCompatActivity
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId){
                     case R.id.tab_consultar:
-                        BorrarParcelaFragment borrarParcelaFragment = new BorrarParcelaFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayuot_for_fragment, borrarParcelaFragment)
+                        MapFragment mapFragment = new MapFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.relativelayuot_for_fragment, mapFragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
                         break;
@@ -179,7 +170,7 @@ public class MainActivity extends AppCompatActivity
                     consul.getTag()
             ).commit();
         } else if (id == R.id.nav_manage) {
-            BorrarParcelaFragment borrar = new BorrarParcelaFragment();
+            MapFragment borrar = new MapFragment();
             manager.beginTransaction().replace(
                     R.id.relativelayuot_for_fragment,
                     borrar,

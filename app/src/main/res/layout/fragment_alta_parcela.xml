@@ -30,34 +30,6 @@
             android:padding="@dimen/horizontal_padding"
             tools:context="com.example.luis.parcelasapp.AltaParcelaFragment">
 
-            <!--<android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/campoParcela"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Parcela"
-                    android:gravity="center"
-                    android:background="@drawable/combo"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/campoLocalidad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Localidad"
-                    android:gravity="center"
-                    android:background="@drawable/combo"/>
-
-            </android.support.design.widget.TextInputLayout>-->
-
             <EditText
                 android:id="@+id/campoParcela"
                 android:layout_width="match_parent"
@@ -83,34 +55,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight=".70">
-
-                    <!--<android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/editarLatitud"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/latitud"
-                            android:gravity="center"
-                            android:background="@drawable/combo"/>
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <android.support.design.widget.TextInputEditText
-                            android:id="@+id/editarLongitud"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/longitud"
-                            android:gravity="center"
-                            android:background="@drawable/combo"/>
-
-                    </android.support.design.widget.TextInputLayout>-->
 
                     <EditText
                         android:id="@+id/editarLatitud"
@@ -149,14 +93,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <!--<EditText
-                android:id="@+id/cultivo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Cultivo"
-                android:gravity="center"
-                android:background="@drawable/combo"/>-->
 
             <Spinner
                 android:id="@+id/cultivos"

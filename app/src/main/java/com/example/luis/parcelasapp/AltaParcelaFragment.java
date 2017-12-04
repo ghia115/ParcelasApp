@@ -62,6 +62,7 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_alta_parcela, container, false);
         View rootView = inflater.inflate(R.layout.fragment_alta_parcela, container, false);
+        setHasOptionsMenu(true);
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.actionBar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -119,7 +120,6 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
 
         editarLatitud = (TextView) rootView.findViewById(R.id.editarLatitud);
         editarLongitud = (TextView) rootView.findViewById(R.id.editarLongitud);
-        //cultivo = (TextView) rootView.findViewById(R.id.cultivo);
         arena = (TextView) rootView.findViewById(R.id.arena);
         arcilla = (TextView) rootView.findViewById(R.id.arcilla);
         materiaSeca = (TextView) rootView.findViewById(R.id.materiaSeca);
