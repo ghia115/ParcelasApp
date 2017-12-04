@@ -216,4 +216,5 @@
 
         </LinearLayout>
     </ScrollView>
+    <include layout="@layout/action_bar"></include>
 </android.support.design.widget.CoordinatorLayout>
