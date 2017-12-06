@@ -34,6 +34,7 @@ import android.view.View.OnClickListener;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Pattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +46,12 @@ import java.util.List;
 public class AltaParcelaFragment extends Fragment implements OnClickListener ,Validator.ValidationListener {
 
     @NotEmpty
-    private TextView edt1, edt2, editarLatitud, editarLongitud, arena, arcilla, materiaSeca;
+    private TextView edt1, edt2, editarLatitud, editarLongitud;
 
     FloatingActionButton location;
     LocationManager mlocManager;
     AlertDialog alert = null;
-    Spinner cultivos;
+    Spinner cultivos, tipoSuelo, riego;
 
     public AltaParcelaFragment() {
         // Required empty public constructor
@@ -120,9 +121,8 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
 
         editarLatitud = (TextView) rootView.findViewById(R.id.editarLatitud);
         editarLongitud = (TextView) rootView.findViewById(R.id.editarLongitud);
-        arena = (TextView) rootView.findViewById(R.id.arena);
-        arcilla = (TextView) rootView.findViewById(R.id.arcilla);
-        materiaSeca = (TextView) rootView.findViewById(R.id.materiaSeca);
+        tipoSuelo = (Spinner) rootView.findViewById(R.id.tipoSuelo);
+        riego = (Spinner) rootView.findViewById(R.id.riego);
         location = (FloatingActionButton) rootView.findViewById(R.id.location);
         location.setOnClickListener(this);
 
@@ -135,24 +135,6 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
 
             }
         });
-        /*buttn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //Recoger el texto de un EditText
-                String text1 = edt1.getText().toString();
-                String text2 = edt2.getText().toString();
-
-                //Mostrar texto en el log de la consola
-                //Log.d("com.duhnnae.test2",text1 + text2);
-
-                //Muestra un toast en pantalla
-                Toast.makeText(getActivity().getBaseContext(),
-                        text1 + text2, Toast.LENGTH_LONG).show();
-
-            }
-        });*/
-
 
         return rootView;
     }
@@ -195,9 +177,8 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         values.put(Estructura_BBDD.LATITUD, editarLatitud.getText().toString());
         values.put(Estructura_BBDD.LONGITUD, editarLongitud.getText().toString());
         values.put(Estructura_BBDD.CULTIVO, cultivos.getSelectedItem().toString());
-        values.put(Estructura_BBDD.ARENA, arena.getText().toString());
-        values.put(Estructura_BBDD.ARCILLA, arcilla.getText().toString());
-        values.put(Estructura_BBDD.MATERIA, materiaSeca.getText().toString());
+        values.put(Estructura_BBDD.TIPOSUELO, tipoSuelo.getSelectedItem().toString());
+        values.put(Estructura_BBDD.RIEGO, riego.getSelectedItem().toString());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(Estructura_BBDD.TABLE_NAME, null, values);
@@ -210,9 +191,8 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         editarLatitud.setText("");
         editarLongitud.setText("");
         cultivos.setSelection(0);
-        arena.setText("");
-        arcilla.setText("");
-        materiaSeca.setText("");
+        tipoSuelo.setSelection(0);
+        riego.setSelection(0);
     }
 
     @Override

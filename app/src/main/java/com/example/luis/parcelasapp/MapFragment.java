@@ -87,7 +87,7 @@ public class MapFragment extends Fragment {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
-                fechaInicio.setText(date);
+                fechaFinal.setText(date);
             }
         };
 

@@ -102,27 +102,19 @@
                 android:gravity="center"
                 android:background="@drawable/combo"/>
 
-            <EditText
-                android:id="@+id/arena"
+            <Spinner
+                android:id="@+id/tipoSuelo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Arena"
+                android:hint="Tipo Suelo"
                 android:gravity="center"
                 android:background="@drawable/combo"/>
 
-            <EditText
-                android:id="@+id/arcilla"
+            <Spinner
+                android:id="@+id/riego"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Arcilla"
-                android:gravity="center"
-                android:background="@drawable/combo"/>
-
-            <EditText
-                android:id="@+id/materiaSeca"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Materia Seca"
+                android:hint="Riego"
                 android:gravity="center"
                 android:background="@drawable/combo"/>
 
@@ -152,5 +144,6 @@
 
         </LinearLayout>
     </ScrollView>
-    <include layout="@layout/action_bar"></include>
+    <!--<include layout="@layout/action_bar"></include>
+    https://www.javatpoint.com/android-sqlite-example-with-spinner-->
 </android.support.design.widget.CoordinatorLayout>
