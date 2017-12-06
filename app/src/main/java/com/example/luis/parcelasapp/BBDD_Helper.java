@@ -24,9 +24,14 @@ public class BBDD_Helper extends SQLiteOpenHelper {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(Estructura_BBDD.SQL_DELETE_ENTRIES);
+        db.execSQL(Estructura_BBDD.SQL_CREATE_RIEGO_DATA);
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public void insertDataRiego (){
+
     }
 }

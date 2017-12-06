@@ -22,6 +22,8 @@ public class Estructura_BBDD {
     public static final String RIEGO = "riego";
 
     public static final String TABLE_RIEGO = "datosRiego";
+    public static final String _ID = "_id";
+    public static final String TIPORIEGO = "tipo_riego";
     //}
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
@@ -38,9 +40,8 @@ public class Estructura_BBDD {
 
     public static final String SQL_CREATE_RIEGO_DATA =
             "CREATE TABLE " + Estructura_BBDD.TABLE_RIEGO + " (" +
-                    Estructura_BBDD.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    Estructura_BBDD.NOMBRE_COLUMNA1 + TEXT_TYPE + COMMA_SEP +
-                    Estructura_BBDD.RIEGO + TEXT_TYPE + " )";
+                    Estructura_BBDD._ID +
+                    Estructura_BBDD.TIPORIEGO + TEXT_TYPE + " )";
 
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Estructura_BBDD.TABLE_NAME;
