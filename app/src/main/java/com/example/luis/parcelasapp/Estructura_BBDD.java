@@ -46,4 +46,7 @@ public class Estructura_BBDD {
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Estructura_BBDD.TABLE_NAME;
 
+    public static final String SQL_DELETE_RIEGO_DATA =
+            "DROP TABLE IF EXISTS " + Estructura_BBDD.TABLE_RIEGO;
+
 }
