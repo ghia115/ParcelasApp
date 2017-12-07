@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.location.Location;
@@ -83,6 +84,7 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
 
         ImageButton buttn = (ImageButton) rootView.findViewById(R.id.altaParcela);
 
+        loadSpinnerData();
         cultivos  = (Spinner) rootView.findViewById(R.id.cultivos);
         ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter(
                 getContext(),
@@ -239,6 +241,44 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadSpinnerData() {
+        List<String> labels = getAllLabels();
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, labels);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        riego.setAdapter(dataAdapter);
+    }
+
+    public List<String> getAllLabels(){
+        List<String> list = new ArrayList<String>();
+
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + Estructura_BBDD.TABLE_RIEGO;
+
+        final BBDD_Helper helper = new BBDD_Helper(this.getContext());
+
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                list.add(cursor.getString(1));//adding 2nd column data
+            } while (cursor.moveToNext());
+        }
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning lables
+        return list;
     }
 
     public class MyLocationListener implements LocationListener{
