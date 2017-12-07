@@ -146,5 +146,6 @@
     </ScrollView>
     <!--<include layout="@layout/action_bar"></include>
     https://www.javatpoint.com/android-sqlite-example-with-spinner
-    http://www.hermosaprogramacion.com/2014/10/android-sqlite-bases-de-datos/-->
+    http://www.hermosaprogramacion.com/2014/10/android-sqlite-bases-de-datos/
+    https://stackoverflow.com/questions/28001171/populating-spinner-with-data-from-database-->
 </android.support.design.widget.CoordinatorLayout>

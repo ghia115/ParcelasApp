@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.content.Context;
 import android.widget.ImageButton;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,7 +85,6 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
 
         ImageButton buttn = (ImageButton) rootView.findViewById(R.id.altaParcela);
 
-        loadSpinnerData();
         cultivos  = (Spinner) rootView.findViewById(R.id.cultivos);
         ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter(
                 getContext(),
@@ -128,6 +128,16 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         location = (FloatingActionButton) rootView.findViewById(R.id.location);
         location.setOnClickListener(this);
 
+        SimpleCursorAdapter riegoAdapter = new SimpleCursorAdapter(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                getRiegos(),
+                new String[]{Estructura_BBDD.TIPORIEGO},
+                new int[]{android.R.id.text1},
+                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+                riegoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                riego.setAdapter(riegoAdapter);
+
         buttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +149,13 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         });
 
         return rootView;
+    }
+
+    public Cursor getRiegos(){
+        //Seleccionamos todas las filas de la tabla Genres
+        final BBDD_Helper helper = new BBDD_Helper(this.getContext());
+        SQLiteDatabase db = helper.getReadableDatabase();
+        return db.rawQuery("select * from " + Estructura_BBDD.TABLE_RIEGO, null);
     }
 
     @Override
@@ -241,44 +258,6 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void loadSpinnerData() {
-        List<String> labels = getAllLabels();
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),android.R.layout.simple_spinner_item, labels);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        riego.setAdapter(dataAdapter);
-    }
-
-    public List<String> getAllLabels(){
-        List<String> list = new ArrayList<String>();
-
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + Estructura_BBDD.TABLE_RIEGO;
-
-        final BBDD_Helper helper = new BBDD_Helper(this.getContext());
-
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                list.add(cursor.getString(1));//adding 2nd column data
-            } while (cursor.moveToNext());
-        }
-        // closing connection
-        cursor.close();
-        db.close();
-
-        // returning lables
-        return list;
     }
 
     public class MyLocationListener implements LocationListener{

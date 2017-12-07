@@ -34,7 +34,7 @@ public class BBDD_Helper extends SQLiteOpenHelper {
         values.put(Estructura_BBDD.TIPORIEGO, "Superficial");
 
         db.insert(Estructura_BBDD.TABLE_RIEGO, null,values);
-        db.close();
+        //db.close();
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
