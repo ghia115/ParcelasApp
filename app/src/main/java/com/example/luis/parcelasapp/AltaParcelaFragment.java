@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 
+import com.example.luis.parcelasapp.modelo.SpinnerObject;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
@@ -128,15 +129,7 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         location = (FloatingActionButton) rootView.findViewById(R.id.location);
         location.setOnClickListener(this);
 
-        SimpleCursorAdapter riegoAdapter = new SimpleCursorAdapter(
-                getContext(),
-                android.R.layout.simple_spinner_item,
-                getRiegos(),
-                new String[]{Estructura_BBDD.TIPORIEGO},
-                new int[]{android.R.id.text1},
-                SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-                riegoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                riego.setAdapter(riegoAdapter);
+        loadSpinnerDataHama();
 
         buttn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,11 +144,44 @@ public class AltaParcelaFragment extends Fragment implements OnClickListener ,Va
         return rootView;
     }
 
-    public Cursor getRiegos(){
-        //Seleccionamos todas las filas de la tabla Genres
+    public List<SpinnerObject> getAllLabels(){
+        List<SpinnerObject> labels = new ArrayList<SpinnerObject>();
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + Estructura_BBDD.TABLE_RIEGO;
+
         final BBDD_Helper helper = new BBDD_Helper(this.getContext());
-        SQLiteDatabase db = helper.getReadableDatabase();
-        return db.rawQuery("select * from " + Estructura_BBDD.TABLE_RIEGO, null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                labels.add(new SpinnerObject (cursor.getInt(0) , cursor.getString(1)));
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning labels
+        return labels;
+    }
+
+    private void loadSpinnerDataHama() {
+        // database handler
+        //DatabaseSpinner db = new DatabaseSpinner(getApplicationContext());
+        // Spinner Drop down elements
+        List <SpinnerObject> lables = getAllLabels();
+        // Creating adapter for spinner
+        ArrayAdapter<SpinnerObject> dataAdapter = new ArrayAdapter<SpinnerObject>(
+                getContext(),
+                android.R.layout.simple_spinner_item, lables);
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to spinner
+        riego.setAdapter(dataAdapter);
     }
 
     @Override

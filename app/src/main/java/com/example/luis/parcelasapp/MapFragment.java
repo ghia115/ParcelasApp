@@ -6,13 +6,34 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.luis.parcelasapp.modelo.DdsBalance;
+import com.example.luis.parcelasapp.modelo.MresumenRiego;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -36,6 +57,7 @@ public class MapFragment extends Fragment {
 
         final TextView fechaInicio = (TextView) v.findViewById(R.id.dateInicio);
         final TextView fechaFinal = (TextView) v.findViewById(R.id.dateFinal);
+        ImageButton consultar = (ImageButton) v.findViewById(R.id.consultar);
 
         fechaInicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +113,54 @@ public class MapFragment extends Fragment {
             }
         };
 
+        final ArrayList<MresumenRiego> result = new ArrayList<>();
+
+        final RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        consultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                        Request.Method.GET,
+                        "http://172.16.1.11/app/api/RiegoChihuahua?est=19&fechaIni=" + fechaInicio.getText() + "&fechaFin=" + fechaFinal.getText() + "&opc=1&riego=1&asiento=1",
+                        null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                //Log.d("JSON", "Respuesta" + response);
+
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+                                        result.add(resumenRiego(response.getJSONObject(i)));
+                                    }
+                                    catch (JSONException e) {
+                                    }
+                                }
+                                Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Error", "Respuesta en JSON" + error.getMessage());
+                            }
+                        }
+                );
+                queue.add(jsonArrayRequest);
+            }
+        });
+
 
         return v;
+    }
+
+    private final MresumenRiego resumenRiego(JSONObject obj) throws JSONException {
+        String condicion = obj.getString("Condicion");
+        String fecha = obj.getString("Fecha");
+        double lb = obj.getDouble("Lb");
+        double tr = obj.getDouble("Tr");
+
+        return new MresumenRiego(condicion, fecha, lb, tr);
     }
 
 }

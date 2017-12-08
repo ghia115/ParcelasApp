@@ -24,15 +24,17 @@ public class BBDD_Helper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
-        values.put(Estructura_BBDD._ID, "1");
+        values.put(Estructura_BBDD._ID, 1);
         values.put(Estructura_BBDD.TIPORIEGO, "Goteo");
-        values.put(Estructura_BBDD._ID, "2");
+        db.insert(Estructura_BBDD.TABLE_RIEGO, null,values);
+        values.put(Estructura_BBDD._ID, 2);
         values.put(Estructura_BBDD.TIPORIEGO, "Micro aspersión");
-        values.put(Estructura_BBDD._ID, "3");
+        db.insert(Estructura_BBDD.TABLE_RIEGO, null,values);
+        values.put(Estructura_BBDD._ID, 3);
         values.put(Estructura_BBDD.TIPORIEGO, "Pivote central avance frontal");
-        values.put(Estructura_BBDD._ID, "4");
+        db.insert(Estructura_BBDD.TABLE_RIEGO, null,values);
+        values.put(Estructura_BBDD._ID, 4);
         values.put(Estructura_BBDD.TIPORIEGO, "Superficial");
-
         db.insert(Estructura_BBDD.TABLE_RIEGO, null,values);
         //db.close();
     }

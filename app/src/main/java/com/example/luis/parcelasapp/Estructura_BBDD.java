@@ -40,7 +40,7 @@ public class Estructura_BBDD {
 
     public static final String SQL_CREATE_RIEGO_DATA =
             "CREATE TABLE " + Estructura_BBDD.TABLE_RIEGO + " (" +
-                    Estructura_BBDD._ID + TEXT_TYPE + COMMA_SEP +
+                    Estructura_BBDD._ID + " INTEGER " + COMMA_SEP +
                     Estructura_BBDD.TIPORIEGO + TEXT_TYPE + " )";
 
     public static final String SQL_DELETE_ENTRIES =
