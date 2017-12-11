@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.luis.parcelasapp.R;
 import com.example.luis.parcelasapp.adapter.AdapterTabla;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
+import com.example.luis.parcelasapp.modelo.MresumenRiego;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,8 +108,8 @@ public class ConsultaParcelasFragment extends Fragment {
         return v;
     }
 
-    public void getData(ArrayList result) {
-
+    public void getData(ArrayList<MresumenRiego> result) {
+        ArrayList<MresumenRiego> resultNew = result;
     }
 
     private final DdsBalance dataBalance(JSONObject obj) throws JSONException {

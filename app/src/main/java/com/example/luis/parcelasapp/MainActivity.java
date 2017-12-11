@@ -19,6 +19,7 @@ import com.example.luis.parcelasapp.fragments.ConsultaParcelasFragment;
 import com.example.luis.parcelasapp.fragments.EditarParcelaFragment;
 import com.example.luis.parcelasapp.fragments.MapFragment;
 import com.example.luis.parcelasapp.fragments.chartFragment;
+import com.example.luis.parcelasapp.modelo.MresumenRiego;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void send(ArrayList result) {
+    public void send(ArrayList<MresumenRiego> result) {
         ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment) getSupportFragmentManager().findFragmentById(R.id.listaFragment);
         consultaParcelasFragment.getData(result);
     }

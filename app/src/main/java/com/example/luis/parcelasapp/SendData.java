@@ -1,5 +1,7 @@
 package com.example.luis.parcelasapp;
 
+import com.example.luis.parcelasapp.modelo.MresumenRiego;
+
 import java.util.ArrayList;
 
 /**
@@ -8,5 +10,5 @@ import java.util.ArrayList;
 
 public interface SendData {
 
-    public void send(ArrayList result);
+    public void send(ArrayList<MresumenRiego> result);
 }
