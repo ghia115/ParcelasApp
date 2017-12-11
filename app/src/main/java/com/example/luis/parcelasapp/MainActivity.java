@@ -14,12 +14,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.luis.parcelasapp.fragments.AltaParcelaFragment;
+import com.example.luis.parcelasapp.fragments.ConsultaParcelasFragment;
+import com.example.luis.parcelasapp.fragments.EditarParcelaFragment;
+import com.example.luis.parcelasapp.fragments.MapFragment;
 import com.example.luis.parcelasapp.fragments.chartFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SendData {
 
 
 
@@ -188,5 +194,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void send(ArrayList result) {
+        ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment) getSupportFragmentManager().findFragmentById(R.id.listaFragment);
+        consultaParcelasFragment.getData(result);
     }
 }

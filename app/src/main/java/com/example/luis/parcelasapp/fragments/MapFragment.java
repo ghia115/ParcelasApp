@@ -1,6 +1,7 @@
-package com.example.luis.parcelasapp;
+package com.example.luis.parcelasapp.fragments;
 
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.luis.parcelasapp.R;
+import com.example.luis.parcelasapp.SendData;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
 import com.example.luis.parcelasapp.modelo.MresumenRiego;
 import com.jjoe64.graphview.series.DataPoint;
@@ -44,6 +47,7 @@ public class MapFragment extends Fragment {
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private DatePickerDialog.OnDateSetListener dateSetListenerFinal;
+    SendData sendData;
 
     public MapFragment() {
         // Required empty public constructor
@@ -147,11 +151,22 @@ public class MapFragment extends Fragment {
                         }
                 );
                 queue.add(jsonArrayRequest);
+
+                sendData.send(result);
             }
         });
 
 
         return v;
+    }
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            sendData = (SendData) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Need implement");
+        }
     }
 
     private final MresumenRiego resumenRiego(JSONObject obj) throws JSONException {
