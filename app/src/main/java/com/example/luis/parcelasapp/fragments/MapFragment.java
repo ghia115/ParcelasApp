@@ -141,6 +141,7 @@ public class MapFragment extends Fragment {
                                     }
                                 }
                                 Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
+                                sendData.send(result);
                             }
                         },
                         new Response.ErrorListener() {
@@ -152,7 +153,7 @@ public class MapFragment extends Fragment {
                 );
                 queue.add(jsonArrayRequest);
 
-                sendData.send(result);
+                //sendData.send(result);
             }
         });
 
