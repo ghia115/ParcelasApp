@@ -3,6 +3,7 @@ package com.example.luis.parcelasapp.fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.luis.parcelasapp.MainActivity;
 import com.example.luis.parcelasapp.R;
 import com.example.luis.parcelasapp.SendData;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
@@ -141,7 +143,10 @@ public class MapFragment extends Fragment {
                                     }
                                 }
                                 Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
-                                sendData.send(result);
+
+                                Intent i = new Intent(getContext(),MainActivity.class);
+                                i.putExtra("Contact_list", result);
+                                startActivity(i);
                             }
                         },
                         new Response.ErrorListener() {

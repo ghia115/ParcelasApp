@@ -56,6 +56,8 @@ public class ConsultaParcelasFragment extends Fragment {
 
         listView = (ListView) v.findViewById(R.id.leads_list);
 
+        ArrayList<MresumenRiego> myList = (ArrayList<MresumenRiego>) getActivity().getIntent().getSerializableExtra("mylist");
+
         //dataDdsBalance db = new dataDdsBalance(getContext());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(

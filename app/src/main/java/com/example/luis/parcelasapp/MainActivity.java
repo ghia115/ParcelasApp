@@ -37,7 +37,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbar);
 
-        /*Toolbar toolbarActionBar = (Toolbar) findViewById(R.id.actionBar);
+        /*ConsultaParcelasFragment data = new ConsultaParcelasFragment();
+        data.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().add(
+                R.id.relativelayuot_for_fragment, data).commit();
+
+        Toolbar toolbarActionBar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbarActionBar);*/
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottombar);
