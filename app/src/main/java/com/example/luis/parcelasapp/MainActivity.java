@@ -204,7 +204,34 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void send(ArrayList<MresumenRiego> result) {
-        ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment) getSupportFragmentManager().findFragmentById(R.id.listaFragment);
-        consultaParcelasFragment.getData(result);
+        /*ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment) getSupportFragmentManager().findFragmentById(R.id.listaFragment);
+        consultaParcelasFragment.getData(result);*/
+
+        ConsultaParcelasFragment articleFrag = (ConsultaParcelasFragment)
+                getSupportFragmentManager().findFragmentById(R.id.listaFragment);
+
+        if (articleFrag != null) {
+            articleFrag.getData(result);
+        } else {
+
+            Toast.makeText(this,"array null", Toast.LENGTH_LONG).show();
+            // Otherwise, we're in the one-pane layout and must swap frags...
+
+            // Create fragment and give it an argument for the selected article
+            /*ConsultaParcelasFragment newFragment = new ConsultaParcelasFragment();
+            Bundle args = new Bundle();
+            args.putInt(ConsultaParcelasFragment., result);
+            newFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.relativelayuot_for_fragment, newFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();*/
+        }
     }
 }

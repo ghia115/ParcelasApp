@@ -144,9 +144,7 @@ public class MapFragment extends Fragment {
                                 }
                                 Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
 
-                                Intent i = new Intent(getContext(),MainActivity.class);
-                                i.putExtra("Contact_list", result);
-                                startActivity(i);
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -174,6 +172,7 @@ public class MapFragment extends Fragment {
             throw new ClassCastException("Need implement");
         }
     }
+
 
     private final MresumenRiego resumenRiego(JSONObject obj) throws JSONException {
         String condicion = obj.getString("Condicion");
