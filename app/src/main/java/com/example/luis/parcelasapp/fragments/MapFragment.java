@@ -143,7 +143,7 @@ public class MapFragment extends Fragment {
                                     }
                                 }
                                 Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
-
+                                sendData.send(result);
 
                             }
                         },
@@ -164,6 +164,7 @@ public class MapFragment extends Fragment {
         return v;
     }
 
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
