@@ -204,8 +204,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void send(ArrayList<MresumenRiego> result) {
-        /*ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment) getSupportFragmentManager().findFragmentById(R.id.listaFragment);
-        consultaParcelasFragment.getData(result);*/
+        /*ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment)
+                getSupportFragmentManager().findFragmentById(R.id.listaFragment);
+                consultaParcelasFragment.getData(result);*/
 
         ConsultaParcelasFragment articleFrag = (ConsultaParcelasFragment)
                 getSupportFragmentManager().findFragmentById(R.id.listaFragment);
