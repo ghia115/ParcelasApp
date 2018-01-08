@@ -1,13 +1,14 @@
 package com.example.luis.parcelasapp.fragments;
 
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,16 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.luis.parcelasapp.MainActivity;
 import com.example.luis.parcelasapp.R;
-import com.example.luis.parcelasapp.SendData;
-import com.example.luis.parcelasapp.modelo.DdsBalance;
 import com.example.luis.parcelasapp.modelo.MresumenRiego;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
-import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
-import com.jjoe64.graphview.series.Series;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +42,10 @@ public class MapFragment extends Fragment {
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private DatePickerDialog.OnDateSetListener dateSetListenerFinal;
-    SendData sendData;
+
+    private ArrayList<MresumenRiego> riego;
+    final ArrayList<MresumenRiego> result = new ArrayList<>();
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -63,7 +59,7 @@ public class MapFragment extends Fragment {
 
         final TextView fechaInicio = (TextView) v.findViewById(R.id.dateInicio);
         final TextView fechaFinal = (TextView) v.findViewById(R.id.dateFinal);
-        ImageButton consultar = (ImageButton) v.findViewById(R.id.consultar);
+        final ImageButton consultar = (ImageButton) v.findViewById(R.id.consultar);
 
         fechaInicio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +115,6 @@ public class MapFragment extends Fragment {
             }
         };
 
-        final ArrayList<MresumenRiego> result = new ArrayList<>();
 
         final RequestQueue queue = Volley.newRequestQueue(getActivity());
 
@@ -143,8 +138,18 @@ public class MapFragment extends Fragment {
                                     }
                                 }
                                 Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
-                                sendData.send(result);
 
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelableArrayList("Riego_lits", (ArrayList<? extends Parcelable>) result);
+
+                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                                ConsultaParcelasFragment consultaParcelasFragment = new ConsultaParcelasFragment();
+                                consultaParcelasFragment.setArguments(bundle);
+
+                                fragmentTransaction.replace(R.id.relativelayuot_for_fragment, consultaParcelasFragment);
+                                fragmentTransaction.commit();
                             }
                         },
                         new Response.ErrorListener() {
@@ -163,17 +168,6 @@ public class MapFragment extends Fragment {
 
         return v;
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            sendData = (SendData) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Need implement");
-        }
-    }
-
 
     private final MresumenRiego resumenRiego(JSONObject obj) throws JSONException {
         String condicion = obj.getString("Condicion");

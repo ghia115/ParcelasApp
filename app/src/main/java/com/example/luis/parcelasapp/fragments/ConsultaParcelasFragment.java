@@ -50,6 +50,8 @@ public class ConsultaParcelasFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_consulta_parcelas, container, false);
 
+        Bundle bundle = getArguments();
+
         final ArrayList<DdsBalance> result = new ArrayList<>();
 
         final RequestQueue queue = Volley.newRequestQueue(getActivity());
@@ -108,10 +110,6 @@ public class ConsultaParcelasFragment extends Fragment {
         });*/
 
         return v;
-    }
-
-    public void getData(ArrayList<MresumenRiego> result) {
-        ArrayList<MresumenRiego> resultNew = result;
     }
 
     private final DdsBalance dataBalance(JSONObject obj) throws JSONException {
