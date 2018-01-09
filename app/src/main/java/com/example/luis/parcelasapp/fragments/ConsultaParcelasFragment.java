@@ -50,15 +50,11 @@ public class ConsultaParcelasFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_consulta_parcelas, container, false);
 
-        Bundle bundle = getArguments();
-
         final ArrayList<DdsBalance> result = new ArrayList<>();
 
         final RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         listView = (ListView) v.findViewById(R.id.leads_list);
-
-        ArrayList<MresumenRiego> myList = (ArrayList<MresumenRiego>) getActivity().getIntent().getSerializableExtra("mylist");
 
         //dataDdsBalance db = new dataDdsBalance(getContext());
 
