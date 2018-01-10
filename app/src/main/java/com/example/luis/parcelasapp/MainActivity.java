@@ -26,7 +26,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener, MapFragment.InterfazRiego{
 
 
 
@@ -202,4 +202,34 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void respuesta(ArrayList<MresumenRiego> resultado) {
+        ConsultaParcelasFragment consultaParcelasFragment = (ConsultaParcelasFragment)
+                getSupportFragmentManager().findFragmentById(R.id.listaFragment);
+
+        if (consultaParcelasFragment != null) {
+            // If article frag is available, we're in two-pane layout...
+
+            // Call a method in the ArticleFragment to update its content
+            consultaParcelasFragment.resiveLista(resultado);
+        } else {
+            // Otherwise, we're in the one-pane layout and must swap frags...
+
+            /* Create fragment and give it an argument for the selected article
+            ConsultaParcelasFragment newFragment = new ConsultaParcelasFragment();
+            Bundle args = new Bundle();
+            args.putArra(ConsultaParcelasFragment.ARG_POSITION, resultado);
+            newFragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.listaFragment, newFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();*/
+        }
+    }
 }
