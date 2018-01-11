@@ -2,11 +2,11 @@ package com.example.luis.parcelasapp.fragments;
 
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.luis.parcelasapp.InterfazRiego;
 import com.example.luis.parcelasapp.MainActivity;
 import com.example.luis.parcelasapp.R;
 import com.example.luis.parcelasapp.modelo.MresumenRiego;
@@ -40,9 +39,6 @@ import java.util.Calendar;
  */
 public class MapFragment extends Fragment {
 
-    InterfazRiego mCallback;
-    static ArrayList<MresumenRiego> riego = new ArrayList <MresumenRiego>();
-
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private DatePickerDialog.OnDateSetListener dateSetListenerFinal;
 
@@ -52,30 +48,21 @@ public class MapFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public interface InterfazRiego {
-        public void respuesta(ArrayList<MresumenRiego> resultado);
-    }
-
-    @Deprecated
-    public void onAttach(MainActivity activity) {
-        super.onAttach(activity);
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mCallback = (InterfazRiego) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement InterfazRiego");
-        }
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_map, container, false);
+
+        ArrayList<String> lista = new ArrayList<String>();
+        lista.add("Elemento");
+        lista.add("Elemento 2");
+
+        //https://es.stackoverflow.com/questions/13577/c%C3%B3mo-pasar-un-arraylist-por-un-intent-hacia-otra-activity
+        //https://es.stackoverflow.com/questions/6713/acceder-a-las-variables-de-la-actividad-desde-su-fragmento
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.putExtra("datosRiego", lista);
+        startActivity(intent);
 
         final TextView fechaInicio = (TextView) v.findViewById(R.id.dateInicio);
         final TextView fechaFinal = (TextView) v.findViewById(R.id.dateFinal);
@@ -158,8 +145,7 @@ public class MapFragment extends Fragment {
                                     }
                                 }
                                 Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
-                                //mCallback.respuesta(result);
-                                lista(result);
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -186,13 +172,6 @@ public class MapFragment extends Fragment {
         double tr = obj.getDouble("Tr");
 
         return new MresumenRiego(condicion, fecha, lb, tr);
-    }
-
-    public ArrayList<MresumenRiego> lista(ArrayList resultRiego){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativelayuot_for_fragment, new ConsultaParcelasFragment()).commit();
-        riego = resultRiego;
-        return riego;
     }
 
 }

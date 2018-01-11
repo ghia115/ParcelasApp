@@ -121,8 +121,4 @@ public class ConsultaParcelasFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    public ArrayList<MresumenRiego> resiveLista (ArrayList<MresumenRiego> result){
-        return result;
-    }
-
 }
