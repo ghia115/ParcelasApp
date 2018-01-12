@@ -39,6 +39,14 @@
                 android:background="@drawable/combo"/>
 
             <EditText
+                android:id="@+id/campoNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:gravity="center"
+                android:background="@drawable/combo"/>
+
+            <EditText
                 android:id="@+id/campoLocalidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,7 +138,6 @@
                 android:id="@+id/altaParcela"
                 android:layout_width="@dimen/buttonWidth"
                 android:layout_height="@dimen/buttonHeight"
-                android:onClick=""
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
@@ -142,7 +149,6 @@
                 android:id="@+id/cancelar"
                 android:layout_width="@dimen/buttonWidth"
                 android:layout_height="@dimen/buttonHeight"
-                android:onClick=""
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"

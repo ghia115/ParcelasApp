@@ -60,9 +60,9 @@ public class MapFragment extends Fragment {
 
         //https://es.stackoverflow.com/questions/13577/c%C3%B3mo-pasar-un-arraylist-por-un-intent-hacia-otra-activity
         //https://es.stackoverflow.com/questions/6713/acceder-a-las-variables-de-la-actividad-desde-su-fragmento
-        Intent intent = new Intent(getContext(), MainActivity.class);
+        /*Intent intent = new Intent(getContext(), MainActivity.class);
         intent.putExtra("datosRiego", lista);
-        startActivity(intent);
+        startActivity(intent);*/
 
         final TextView fechaInicio = (TextView) v.findViewById(R.id.dateInicio);
         final TextView fechaFinal = (TextView) v.findViewById(R.id.dateFinal);
@@ -158,6 +158,9 @@ public class MapFragment extends Fragment {
                 queue.add(jsonArrayRequest);
 
                 //sendData.send(result);
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra("datosRiego", result);
+                startActivity(intent);
             }
         });
 

@@ -52,7 +52,7 @@
             android:backgroundTint="@android:color/transparent"
             android:cropToPadding="false"
             android:scaleType="fitCenter"
-            android:src="@drawable/btm_cancelar" />
+            android:src="@drawable/btm_consulta" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

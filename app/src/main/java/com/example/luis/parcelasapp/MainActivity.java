@@ -23,12 +23,14 @@ import com.example.luis.parcelasapp.modelo.MresumenRiego;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
 
+    //ArrayList<MresumenRiego> lista = (ArrayList<MresumenRiego>) getIntent().getSerializableExtra("datosRiego");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.actionBar);
         setSupportActionBar(toolbar);
-
-        ArrayList<String> lista = (ArrayList<String>) getIntent().getSerializableExtra("datosRiego");
 
         /*ConsultaParcelasFragment data = new ConsultaParcelasFragment();
         data.setArguments(getIntent().getExtras());
