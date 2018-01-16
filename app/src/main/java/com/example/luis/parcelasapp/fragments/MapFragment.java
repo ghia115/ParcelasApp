@@ -54,16 +54,6 @@ public class MapFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_map, container, false);
 
-        ArrayList<String> lista = new ArrayList<String>();
-        lista.add("Elemento");
-        lista.add("Elemento 2");
-
-        //https://es.stackoverflow.com/questions/13577/c%C3%B3mo-pasar-un-arraylist-por-un-intent-hacia-otra-activity
-        //https://es.stackoverflow.com/questions/6713/acceder-a-las-variables-de-la-actividad-desde-su-fragmento
-        /*Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.putExtra("datosRiego", lista);
-        startActivity(intent);*/
-
         final TextView fechaInicio = (TextView) v.findViewById(R.id.dateInicio);
         final TextView fechaFinal = (TextView) v.findViewById(R.id.dateFinal);
         final ImageButton consultar = (ImageButton) v.findViewById(R.id.consultar);
@@ -130,7 +120,7 @@ public class MapFragment extends Fragment {
             public void onClick(View v) {
                 JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                         Request.Method.GET,
-                        "http://172.16.1.11/app/api/RiegoChihuahua?est=19&fechaIni=" + fechaInicio.getText() + "&fechaFin=" + fechaFinal.getText() + "&opc=1&riego=1&asiento=1",
+                        "http://172.16.1.180/app/api/RiegoChihuahua?est=19&fechaIni=" + fechaInicio.getText() + "&fechaFin=" + fechaFinal.getText() +"&opc=1&riego=1&asiento=1",
                         null,
                         new Response.Listener<JSONArray>() {
                             @Override
@@ -144,23 +134,19 @@ public class MapFragment extends Fragment {
                                     catch (JSONException e) {
                                     }
                                 }
-                                Toast.makeText(getContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), result.get(1).getCondicion(), Toast.LENGTH_LONG).show();
 
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getActivity().getApplicationContext(), "Error en la respuesta", Toast.LENGTH_LONG).show();
                                 Log.d("Error", "Respuesta en JSON" + error.getMessage());
                             }
                         }
                 );
                 queue.add(jsonArrayRequest);
-
-                //sendData.send(result);
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                intent.putExtra("datosRiego", result);
-                startActivity(intent);
             }
         });
 

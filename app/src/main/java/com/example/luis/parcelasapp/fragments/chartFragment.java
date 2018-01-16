@@ -37,6 +37,7 @@ import java.util.Arrays;
  */
 public class chartFragment extends Fragment {
 
+    final ArrayList<DdsBalance> result = new ArrayList<>();
 
     public chartFragment() {
         // Required empty public constructor
@@ -49,15 +50,13 @@ public class chartFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
 
-        final ArrayList<DdsBalance> result = new ArrayList<>();
-
         final RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         final GraphView graph = (GraphView) v.findViewById(R.id.graphic);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://172.16.1.11/app/api/GraficaRiego",
+                "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2",
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
