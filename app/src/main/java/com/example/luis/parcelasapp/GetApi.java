@@ -25,9 +25,9 @@ import java.util.ArrayList;
 
 public class GetApi {
 
-    public ArrayList<MresumenRiego> apiRiego(){
+    public ArrayList<MresumenRiego> apiRiego(Context context){
         final ArrayList<MresumenRiego> riego = new ArrayList<>();
-        final RequestQueue queue = Volley.newRequestQueue(NoContext.getAppContext());
+        final RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -69,9 +69,9 @@ public class GetApi {
         return new MresumenRiego(condicion, fecha, lb, tr);
     }
 
-    public ArrayList<DdsBalance> apiGrfica(){
+    public ArrayList<DdsBalance> apiGrfica(Context context){
         final ArrayList<DdsBalance> riego = new ArrayList<>();
-        final RequestQueue queue = Volley.newRequestQueue(NoContext.getAppContext());
+        final RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,

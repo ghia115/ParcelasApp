@@ -56,7 +56,7 @@ public class chartFragment extends Fragment {
 
         final GraphView graph = (GraphView) v.findViewById(R.id.graphic);
 
-        result = api.apiGrfica();
+        result = api.apiGrfica(getActivity());
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         for (int i=0; i<result.size(); i++) {
