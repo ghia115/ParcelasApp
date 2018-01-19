@@ -17,6 +17,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +32,9 @@ import java.util.ArrayList;
  */
 
 public class GetApi {
+
+    private static final String USER_AGENT = "Mozilla/5.0";
+    private static final String GET_URL = "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2";
 
     public ArrayList<MresumenRiego> apiRiego(Context context){
         final ArrayList<MresumenRiego> riego = new ArrayList<>();
@@ -109,6 +120,33 @@ public class GetApi {
         int dds = obj.getInt("Dds");
 
         return new DdsBalance(balance, dds);
+    }
+
+    //https://www.journaldev.com/7148/java-httpurlconnection-example-java-http-request-get-post
+    public static void sendGET() throws IOException {
+        URL obj = new URL(GET_URL);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = con.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            // print result
+            System.out.println(response.toString());
+        } else {
+            System.out.println("GET request not worked");
+        }
+
     }
 
 }
