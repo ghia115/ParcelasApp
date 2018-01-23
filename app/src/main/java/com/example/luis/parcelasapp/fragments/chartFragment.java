@@ -39,7 +39,6 @@ import java.util.Arrays;
 public class chartFragment extends Fragment {
 
     ArrayList<DdsBalance> result = new ArrayList<>();
-    GetApi api = new GetApi();
 
     public chartFragment() {
         // Required empty public constructor
@@ -57,11 +56,6 @@ public class chartFragment extends Fragment {
         final GraphView graph = (GraphView) v.findViewById(R.id.graphic);
 
         //result = api.apiGrfica(getActivity());
-        try {
-            api.sendGET();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         for (int i=0; i<result.size(); i++) {
