@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.luis.parcelasapp.GetApi;
+import com.example.luis.parcelasapp.NetworkManager;
 import com.example.luis.parcelasapp.R;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
 import com.jjoe64.graphview.GraphView;
@@ -55,7 +56,36 @@ public class chartFragment extends Fragment {
 
         final GraphView graph = (GraphView) v.findViewById(R.id.graphic);
 
+        String url = "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2";
         //result = api.apiGrfica(getActivity());
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //Log.d("JSON", "Respuesta" + response);
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                result.add(dataBalance(response.getJSONObject(i)));
+                            }
+                            catch (JSONException e) {
+                            }
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error", "Respuesta en JSON" + error.getMessage());
+                    }
+                }
+        );
+
+        NetworkManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonArrayRequest);
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         for (int i=0; i<result.size(); i++) {
