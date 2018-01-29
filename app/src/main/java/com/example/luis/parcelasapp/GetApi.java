@@ -33,9 +33,6 @@ import java.util.ArrayList;
 
 public class GetApi {
 
-    private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String GET_URL = "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2";
-
     public ArrayList<MresumenRiego> apiRiego(Context context){
         final ArrayList<MresumenRiego> riego = new ArrayList<>();
         final RequestQueue queue = Volley.newRequestQueue(context);
@@ -121,32 +118,4 @@ public class GetApi {
 
         return new DdsBalance(balance, dds);
     }
-
-    //https://www.journaldev.com/7148/java-httpurlconnection-example-java-http-request-get-post
-    public static void sendGET() throws IOException {
-        URL obj = new URL(GET_URL);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            // print result
-            System.out.println(response.toString());
-        } else {
-            System.out.println("GET request not worked");
-        }
-
-    }
-
 }

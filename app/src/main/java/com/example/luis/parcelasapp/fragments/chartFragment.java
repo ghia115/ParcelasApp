@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.luis.parcelasapp.GetApi;
+import com.example.luis.parcelasapp.Mriego;
 import com.example.luis.parcelasapp.NetworkManager;
 import com.example.luis.parcelasapp.R;
 import com.example.luis.parcelasapp.modelo.DdsBalance;
@@ -33,13 +34,19 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import com.example.luis.parcelasapp.GetData;
 /**
  * A simple {@link Fragment} subclass.
  */
 public class chartFragment extends Fragment {
 
-    ArrayList<DdsBalance> result = new ArrayList<>();
+    ArrayList<DdsBalance> resultd = new ArrayList<>();
+
+    //GetApi api = new GetApi();
+    GetData obj = new GetData();
+
 
     public chartFragment() {
         // Required empty public constructor
@@ -56,9 +63,10 @@ public class chartFragment extends Fragment {
 
         final GraphView graph = (GraphView) v.findViewById(R.id.graphic);
 
-        String url = "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2";
-        //result = api.apiGrfica(getActivity());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        //List<Mriego> result = obj.DataRiego();
+        List<DdsBalance> result = obj.DataGrafica();
+        //result = api.apiGrfica(getActivity().getApplicationContext());
+        /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2",
                 null,
@@ -85,7 +93,7 @@ public class chartFragment extends Fragment {
                 }
         );
 
-        NetworkManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonArrayRequest);
+        NetworkManager.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonArrayRequest);*/
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         for (int i=0; i<result.size(); i++) {
