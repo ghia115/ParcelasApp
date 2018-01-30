@@ -42,10 +42,10 @@ import com.example.luis.parcelasapp.GetData;
  */
 public class chartFragment extends Fragment {
 
-    ArrayList<DdsBalance> resultd = new ArrayList<>();
+    ArrayList<DdsBalance> result = new ArrayList<>();
 
-    //GetApi api = new GetApi();
-    GetData obj = new GetData();
+    GetApi api = new GetApi();
+    //GetData obj = new GetData();
 
 
     public chartFragment() {
@@ -64,8 +64,8 @@ public class chartFragment extends Fragment {
         final GraphView graph = (GraphView) v.findViewById(R.id.graphic);
 
         //List<Mriego> result = obj.DataRiego();
-        List<DdsBalance> result = obj.DataGrafica();
-        //result = api.apiGrfica(getActivity().getApplicationContext());
+        //List<DdsBalance> result = obj.DataGrafica();
+        result = api.apiGrfica(getActivity().getApplicationContext());
         /*JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 "http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2",

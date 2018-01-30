@@ -89,62 +89,59 @@ public class GetData {
         return ListMriego;
     }
 
+    //https://es.stackoverflow.com/questions/13521/error-android-os-networkonmainthreadexception-en-usar-httpurlconnection-de-andro
+
     public List<DdsBalance> DataGrafica() {
         final List<DdsBalance> ListDdsBalance = new ArrayList<DdsBalance>();
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
+        try {
 
-                    URL url = new URL("http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setRequestProperty("Accept", "application/json");
+            URL url = new URL("http://172.16.1.180/app/api/GraficaRiego?est=19&fechaIni=1/04/2017&fechaFin=10/07/2017&opc=1&riego=1&asiento=2");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
 
-                    if (conn.getResponseCode() != 200) {
-                        throw new RuntimeException("Failed : HTTP error code : "
-                                + conn.getResponseCode());
-                    }
-
-                    BufferedReader br = new BufferedReader(new InputStreamReader(
-                            (conn.getInputStream())));
-
-                    String output;
-                    //System.out.println("Output from Server .... \n");
-                    while ((output = br.readLine()) != null) {
-
-                        JSONArray jsonArr = new JSONArray(output);
-                        for (int i = 0; i < jsonArr.length(); i++)
-                        {
-                            JSONObject jsonObj = jsonArr.getJSONObject(i);
-                            System.out.println(jsonArr.getJSONObject(i));
-                            //JSONObject jsonObj = jsonArr.getJSONObject(i);
-                            Double balance = jsonObj.getDouble("balance");
-                            int dds = jsonObj.getInt("dds");
-
-
-                            ListDdsBalance.add(new DdsBalance(balance, dds));
-
-                        }
-
-                    }
-
-                    conn.disconnect();
-
-                } catch (MalformedURLException e) {
-
-                    e.printStackTrace();
-
-                } catch (IOException e) {
-
-                    e.printStackTrace();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            if (conn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + conn.getResponseCode());
             }
-        });
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+
+            String output;
+            //System.out.println("Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+
+                JSONArray jsonArr = new JSONArray(output);
+                for (int i = 0; i < jsonArr.length(); i++)
+                {
+                    JSONObject jsonObj = jsonArr.getJSONObject(i);
+                    System.out.println(jsonArr.getJSONObject(i));
+                    //JSONObject jsonObj = jsonArr.getJSONObject(i);
+                    Double balance = jsonObj.getDouble("balance");
+                    int dds = jsonObj.getInt("dds");
+
+
+                    ListDdsBalance.add(new DdsBalance(balance, dds));
+
+                }
+
+            }
+
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
 
